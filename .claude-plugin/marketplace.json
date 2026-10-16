@@ -1,0 +1,14 @@
+{
+  "name": "neuralalpha",
+  "owner": { "name": "NeuralAlpha" },
+  "description": "Guardrails for AI coding agents that act on their own.",
+  "plugins": [
+    {
+      "name": "agent-guardrails",
+      "source": "./plugins/agent-guardrails",
+      "description": "Kill switch, deny rules for risky shell commands, daily caps and an attempt/done ledger for Claude Code tool calls.",
+      "category": "security",
+      "tags": ["guardrails", "safety", "hooks", "kill-switch", "audit"]
+    }
+  ]
+}
