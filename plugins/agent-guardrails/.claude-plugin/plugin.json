@@ -1,0 +1,10 @@
+{
+  "name": "agent-guardrails",
+  "description": "Kill switch, deny rules for risky shell commands, daily caps and an attempt/done ledger for Claude Code tool calls. Standard library only.",
+  "version": "0.1.0",
+  "author": { "name": "NeuralAlpha" },
+  "homepage": "https://github.com/neuralalpha-ai/agent-guardrails",
+  "repository": "https://github.com/neuralalpha-ai/agent-guardrails",
+  "license": "MIT",
+  "keywords": ["guardrails", "safety", "hooks", "kill-switch", "audit", "agent-ops"]
+}
