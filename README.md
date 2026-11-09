@@ -18,7 +18,7 @@ In Claude Code:
 /plugin install agent-guardrails@neuralalpha
 ```
 
-Requires `python3` on PATH. On Windows, if only `python` exists, install Python from python.org (it provides the `py` launcher) or add a `python3` alias; otherwise the hook fails open (it never blocks, and Claude Code shows a hook error).
+Requires `python3` on PATH. On Windows, if only `python` exists, install Python from python.org (it provides the `py` launcher) or add a `python3` alias; otherwise the hook cannot start. From 0.1.1 the PreToolUse hook sets `onFailure: "block"` (Claude Code v2.1.295 or later), so if the hook fails to start, times out or exits with an unexpected code, the tool call is stopped instead of passing through. On older Claude Code versions the field is not honoured and a failed hook may let the call through.
 
 ## Use
 
@@ -44,7 +44,7 @@ Requires `python3` on PATH. On Windows, if only `python` exists, install Python 
 
 Add `.claude/guardrails/` to your `.gitignore` if you do not want the ledger committed.
 
-A config that isn't valid JSON blocks writes (so a typo can't silently switch your rules off). Any other internal error fails open and is logged as `guard_error`.
+A config that isn't valid JSON blocks writes (so a typo can't silently switch your rules off). An unexpected internal error inside `guard.py` itself still exits 0 (fail open) and is logged as `guard_error`; `onFailure: "block"` covers failures of the hook process (cannot start, timeout, unexpected exit code), not errors the script catches and swallows. The PostToolUse ledger hook keeps the default, since the tool call has already run.
 
 ## What it is not
 
