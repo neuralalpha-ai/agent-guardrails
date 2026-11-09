@@ -100,5 +100,15 @@ class GuardTest(unittest.TestCase):
         self.assertEqual(r.returncode, 0)
 
 
+class HooksConfigTests(unittest.TestCase):
+    def test_pretooluse_hook_fails_closed(self):
+        import json, pathlib
+        d = json.loads((pathlib.Path(__file__).resolve().parents[1] / "hooks" / "hooks.json").read_text())
+        for entry in d["hooks"]["PreToolUse"]:
+            for h in entry["hooks"]:
+                self.assertEqual(h.get("onFailure"), "block")
+
+
 if __name__ == "__main__":
     unittest.main()
+
